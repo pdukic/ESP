@@ -1,20 +1,36 @@
 <?php
+
+/*
+  Rui Santos
+  Complete project details at https://RandomNerdTutorials.com/esp32-esp8266-mysql-database-php/
+  
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files.
+  
+  The above copyright notice and this permission notice shall be included in all
+  copies or substantial portions of the Software.
+*/
+
 $servername = "localhost";
-$username = "root";
-$password = "replace with your password";
-$dbname = "replace with your database name";
 
-/*$conn = mysqli_connect($dbServername, $dbUsername, $dbPassword, $dbName);*/
+// REPLACE with your Database name
+$dbname = "if0_38170413_pdukic";
+// REPLACE with Database user
+$username = "if0_38170413";
+// REPLACE with Database user password
+$password = "ElisPatrik123";
 
+// Keep this API Key value to be compatible with the ESP32 code provided in the project page. 
+// If you change this value, the ESP32 sketch needs to match
 $api_key_value = "tPmAT5Ab3j7F9";
 
-$api_key= $sensor = $location = $temperatura = $vlaznost = $pritisak = "";
+$api_key= $senzor = $lokacija = $temperatura = $vlaznost = $pritisak = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $api_key = test_input($_POST["api_key"]);
     if($api_key == $api_key_value) {
-        $sensor = test_input($_POST["sensor"]);
-        $location = test_input($_POST["location"]);
+        $senzor = test_input($_POST["sensor"]);
+        $lokacija = test_input($_POST["location"]);
         $temperatura = test_input($_POST["value1"]);
         $vlaznost = test_input($_POST["value2"]);
         $pritisak = test_input($_POST["value3"]);
@@ -27,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } 
         
         $sql = "INSERT INTO SensorData (sensor, location, value1, value2, value3)
-        VALUES ('" . $sensor . "', '" . $location . "', '" . $value1 . "', '" . $value2 . "', '" . $value3 . "')";
+        VALUES ('" . $senzor . "', '" . $lokacija . "', '" . $temperatura . "', '" . $vlaznost . "', '" . $pritisak . "')";
         
         if ($conn->query($sql) === TRUE) {
             echo "New record created successfully";
